@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840256A21DA60AB1009EDC93 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840256A11DA60AB1009EDC93 /* API.swift */; };
 		841BCE5B1DA5EB6400967205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BCE5A1DA5EB6400967205 /* AppDelegate.swift */; };
 		841BCE5D1DA5EB6400967205 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BCE5C1DA5EB6400967205 /* ViewController.swift */; };
 		841BCE601DA5EB6400967205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BCE5E1DA5EB6400967205 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		840256A11DA60AB1009EDC93 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		841BCE571DA5EB6400967205 /* Frames Per Second.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Frames Per Second.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		841BCE5A1DA5EB6400967205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841BCE5C1DA5EB6400967205 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		841BCE591DA5EB6400967205 /* Frames Per Second */ = {
 			isa = PBXGroup;
 			children = (
+				840256A11DA60AB1009EDC93 /* API.swift */,
 				841BCE5A1DA5EB6400967205 /* AppDelegate.swift */,
 				841BCE5C1DA5EB6400967205 /* ViewController.swift */,
 				841BCE6C1DA5EF7900967205 /* MasterViewController.swift */,
@@ -141,6 +144,7 @@
 			files = (
 				841BCE5D1DA5EB6400967205 /* ViewController.swift in Sources */,
 				841BCE5B1DA5EB6400967205 /* AppDelegate.swift in Sources */,
+				840256A21DA60AB1009EDC93 /* API.swift in Sources */,
 				841BCE6D1DA5EF7900967205 /* MasterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +307,7 @@
 				841BCE6B1DA5EB6400967205 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

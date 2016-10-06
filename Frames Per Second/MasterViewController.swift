@@ -32,19 +32,19 @@ class MasterViewController: UIViewController, UITabBarDelegate {
 
         switch item.tag {
         case 0:
-            // tv
-            segmentedControl.insertSegment(withTitle: "On TV", at: 0, animated: true)
-            segmentedControl.insertSegment(withTitle: "Popular", at: 1, animated: true)
-            segmentedControl.insertSegment(withTitle: "Top Rated", at: 2, animated: true)
+            contentType = .tv
+            segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
+            segmentedControl.insertSegment(withTitle: "Top Rated", at: 1, animated: true)
+            segmentedControl.insertSegment(withTitle: "On The Air", at: 2, animated: true)
             segmentedControl.insertSegment(withTitle: "Airing Today", at: 3, animated: true)
         case 1:
-            // movie
+            contentType = .movie
             segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
             segmentedControl.insertSegment(withTitle: "Upcoming", at: 1, animated: true)
             segmentedControl.insertSegment(withTitle: "Top Rated", at: 2, animated: true)
             segmentedControl.insertSegment(withTitle: "Now Playing", at: 3, animated: true)
         case 2:
-            // person
+            contentType = .person
             segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
         default:
             break
