@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UIViewController, UITabBarDelegate {
+class MasterViewController: UIViewController, UITabBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var contentType: ContentType?
 
@@ -18,12 +18,14 @@ class MasterViewController: UIViewController, UITabBarDelegate {
     @IBOutlet weak var movieTab: UITabBarItem!
     @IBOutlet weak var personTab: UITabBarItem!
 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tabBar.delegate = self
+        collectionView.delegate = self
     }
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -89,6 +91,20 @@ class MasterViewController: UIViewController, UITabBarDelegate {
                 API.getContent(contentType: .person, contentCategory: .popular)
             }
         }
+    }
+
+    // MARK: Collection View
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
     }
 
 }

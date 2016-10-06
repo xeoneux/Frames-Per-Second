@@ -16,6 +16,7 @@
 		840256B01DA615EA009EDC93 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840256AA1DA615EA009EDC93 /* Person+CoreDataClass.swift */; };
 		840256B11DA615EA009EDC93 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840256AB1DA615EA009EDC93 /* Person+CoreDataProperties.swift */; };
 		840256B31DA61642009EDC93 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840256B21DA61642009EDC93 /* CoreDataStackManager.swift */; };
+		840256B71DA629E2009EDC93 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840256B61DA629E2009EDC93 /* PhotoCollectionViewCell.swift */; };
 		841BCE5B1DA5EB6400967205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BCE5A1DA5EB6400967205 /* AppDelegate.swift */; };
 		841BCE5D1DA5EB6400967205 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BCE5C1DA5EB6400967205 /* ViewController.swift */; };
 		841BCE601DA5EB6400967205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BCE5E1DA5EB6400967205 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		840256AA1DA615EA009EDC93 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataClass.swift"; path = "Frames Per Second/Model/Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		840256AB1DA615EA009EDC93 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "Frames Per Second/Model/Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		840256B21DA61642009EDC93 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		840256B61DA629E2009EDC93 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		841BCE571DA5EB6400967205 /* Frames Per Second.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Frames Per Second.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		841BCE5A1DA5EB6400967205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841BCE5C1DA5EB6400967205 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				841BCE5C1DA5EB6400967205 /* ViewController.swift */,
 				841BCE6C1DA5EF7900967205 /* MasterViewController.swift */,
 				840256B21DA61642009EDC93 /* CoreDataStackManager.swift */,
+				840256B61DA629E2009EDC93 /* PhotoCollectionViewCell.swift */,
 				841BCE5E1DA5EB6400967205 /* Main.storyboard */,
 				841BCE611DA5EB6400967205 /* Assets.xcassets */,
 				841BCE631DA5EB6400967205 /* LaunchScreen.storyboard */,
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				840256AE1DA615EA009EDC93 /* Movie+CoreDataClass.swift in Sources */,
+				840256B71DA629E2009EDC93 /* PhotoCollectionViewCell.swift in Sources */,
 				841BCE5D1DA5EB6400967205 /* ViewController.swift in Sources */,
 				840256B01DA615EA009EDC93 /* Person+CoreDataClass.swift in Sources */,
 				840256AC1DA615EA009EDC93 /* Tv+CoreDataClass.swift in Sources */,
