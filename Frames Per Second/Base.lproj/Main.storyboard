@@ -24,6 +24,9 @@
                                     <segment title="Popular"/>
                                     <segment title="Top Rated"/>
                                 </segments>
+                                <connections>
+                                    <action selector="selectCategory:" destination="BYZ-38-t0r" eventType="valueChanged" id="meB-Bp-MKn"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -33,6 +36,9 @@
                             <constraint firstItem="ahr-uo-oYA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="HsV-UR-mmQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="ahr-uo-oYA" id="ZDN-1Y-SjU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

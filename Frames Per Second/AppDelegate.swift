@@ -44,3 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+enum Type {
+    case tv, movie, person
+}

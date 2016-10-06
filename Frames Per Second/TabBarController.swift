@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  TabBarController.swift
 //  Frames Per Second
 //
 //  Created by Aayush Kapoor on 06/10/16.
@@ -8,11 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UIViewController {
-
-    var type: Type!
-
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +21,6 @@ class MasterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func selectCategory(_ sender: UISegmentedControl) {
-
-    }
 
     /*
     // MARK: - Navigation
