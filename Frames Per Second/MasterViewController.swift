@@ -8,21 +8,26 @@
 
 import UIKit
 
-class MasterViewController: UIViewController {
+class MasterViewController: UIViewController, UITabBarDelegate {
 
-    var type: ContentType!
+    var contentType: ContentType!
+
+    @IBOutlet weak var tabBar: UITabBar!
+    
+    @IBOutlet weak var tvTab: UITabBarItem!
+    @IBOutlet weak var movieTab: UITabBarItem!
+    @IBOutlet weak var personTab: UITabBarItem!
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tabBar.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected Tab: " + item.title!)
     }
     
     @IBAction func selectCategory(_ sender: UISegmentedControl) {

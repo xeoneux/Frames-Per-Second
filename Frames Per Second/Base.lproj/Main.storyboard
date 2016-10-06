@@ -28,6 +28,16 @@
                                     <action selector="selectCategory:" destination="BYZ-38-t0r" eventType="valueChanged" id="meB-Bp-MKn"/>
                                 </connections>
                             </segmentedControl>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgu-zc-LdH">
+                                <frame key="frameInset" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="TV Shows" id="sIF-TX-h2V"/>
+                                    <tabBarItem title="Movies" id="A7H-Qe-rWO"/>
+                                    <tabBarItem title="People" id="eRU-cH-EL6"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -38,7 +48,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Frames Per Second" id="hc3-Zx-R9F"/>
                     <connections>
+                        <outlet property="movieTab" destination="A7H-Qe-rWO" id="qo9-Yf-SMQ"/>
+                        <outlet property="personTab" destination="eRU-cH-EL6" id="TMN-Rs-9bd"/>
                         <outlet property="segmentedControl" destination="ahr-uo-oYA" id="ZDN-1Y-SjU"/>
+                        <outlet property="tabBar" destination="dgu-zc-LdH" id="KuT-0E-79x"/>
+                        <outlet property="tvTab" destination="sIF-TX-h2V" id="jRp-iR-mUk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
