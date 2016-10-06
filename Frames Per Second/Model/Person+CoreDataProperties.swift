@@ -21,5 +21,6 @@ extension Person {
     @NSManaged public var imageData: NSData?
     @NSManaged public var name: String?
     @NSManaged public var popularity: Double
+    @NSManaged public var category: String?
 
 }

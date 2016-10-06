@@ -12,4 +12,20 @@ import CoreData
 
 public class Person: NSManagedObject {
 
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+
+    init(data: [String: Any], category: String, insertInto context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "Tv", in: context)!
+        super.init(entity: entity, insertInto: context)
+
+        id = (data["id"] as! Int16)
+        name = (data["name"] as! String)
+        imageUrl = (data["profile_path"] as! String)
+        popularity = (data["popularity"] as! Double)
+
+        self.category = category
+    }
+
 }

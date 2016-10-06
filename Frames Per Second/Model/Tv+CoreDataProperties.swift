@@ -23,5 +23,6 @@ extension Tv {
     @NSManaged public var imageData: NSData?
     @NSManaged public var title: String?
     @NSManaged public var overview: String?
+    @NSManaged public var category: String?
 
 }
