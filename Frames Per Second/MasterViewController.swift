@@ -11,7 +11,7 @@ import UIKit
 
 class MasterViewController: UIViewController, UITabBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
 
-    var contentType: ContentType?
+    var contentType: ContentType? = [ContentType.tv, ContentType.movie, ContentType.person][Int(arc4random_uniform(3))]
     var contentCategory: ContentCategory?
 
     @IBOutlet weak var tabBar: UITabBar!
@@ -23,11 +23,21 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let entityName = contentType!.rawValue.capitalized
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.sortDescriptors = []
+
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+
         tabBar.delegate = self
         collectionView.delegate = self
+        fetchedResultsController.delegate = self
     }
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -86,6 +96,8 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         }
 
         API.getContent(contentType: contentType!, contentCategory: contentCategory!)
+        try! fetchedResultsController.performFetch()
+        print(fetchedResultsController.fetchedObjects?.count)
     }
 
     // MARK: Collection View
