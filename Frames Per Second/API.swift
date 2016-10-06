@@ -21,7 +21,7 @@ struct API {
 
     static let api_key = ""
     static let api_url = "https://api.themoviedb.org/3"
-    static let image_url = "https://image.tmdb.org/t/p/w500/"
+    static let image_url = "https://image.tmdb.org/t/p/w500"
 
     static func getContent(contentType: ContentType, contentCategory: ContentCategory) {
         let url = "\(api_url)/\(contentType)/\(contentCategory)?api_key=\(api_key)"
@@ -55,5 +55,22 @@ struct API {
         })
 
         contentTask.resume()
+    }
+
+    static func getImage(ext: String, handler: @escaping (_ imageData: Data) -> Void) {
+        let url = "\(image_url)/\(ext)"
+
+        let session = URLSession.shared
+
+        let imageTask = session.dataTask(with: URL(string: url)!, completionHandler: {
+
+            guard $0.2 == nil else {
+                fatalError("Error: Unable to get image...")
+            }
+
+            handler($0.0!)
+        })
+        
+        imageTask.resume()
     }
 }

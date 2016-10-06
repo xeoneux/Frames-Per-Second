@@ -28,16 +28,22 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupFetchedResultsController()
+        try! fetchedResultsController.performFetch()
+        print(fetchedResultsController.fetchedObjects?.count)
+
+        tabBar.delegate = self
+        collectionView.delegate = self
+        fetchedResultsController.delegate = self
+    }
+
+    func setupFetchedResultsController() {
         let entityName = contentType!.rawValue.capitalized
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.sortDescriptors = []
 
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-
-        tabBar.delegate = self
-        collectionView.delegate = self
-        fetchedResultsController.delegate = self
     }
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -96,6 +102,8 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         }
 
         API.getContent(contentType: contentType!, contentCategory: contentCategory!)
+
+        setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
         print(fetchedResultsController.fetchedObjects?.count)
     }
@@ -103,11 +111,71 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     // MARK: Collection View
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return fetchedResultsController.fetchedObjects!.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoCollectionViewCell
+
+        cell.activityIndicator.startAnimating()
+
+        if let contentType = contentType {
+            switch contentType {
+            case .tv:
+                let content = fetchedResultsController.object(at: indexPath) as! Tv
+                if content.imageData != nil {
+                    cell.activityIndicator.stopAnimating()
+
+                    cell.imageView.image = UIImage(data: content.imageData! as Data)
+                } else {
+                    API.getImage(ext: content.imageUrl!, handler: { data in
+                        DispatchQueue.main.async {
+                            cell.activityIndicator.stopAnimating()
+
+                            content.imageData = data as NSData?
+                            CoreDataStackManager.sharedInstance().saveContext()
+                            cell.imageView.image = UIImage(data: content.imageData! as Data)
+                        }
+                    })
+                }
+            case .movie:
+                let content = fetchedResultsController.object(at: indexPath) as! Movie
+                if content.imageData != nil {
+                    cell.activityIndicator.stopAnimating()
+
+                    cell.imageView.image = UIImage(data: content.imageData! as Data)
+                } else {
+                    API.getImage(ext: content.imageUrl!, handler: { data in
+                        DispatchQueue.main.async {
+                            cell.activityIndicator.stopAnimating()
+
+                            content.imageData = data as NSData?
+                            CoreDataStackManager.sharedInstance().saveContext()
+                            cell.imageView.image = UIImage(data: content.imageData! as Data)
+                        }
+                    })
+                }
+            case .person:
+                let content = fetchedResultsController.object(at: indexPath) as! Person
+                if content.imageData != nil {
+                    cell.activityIndicator.stopAnimating()
+
+                    cell.imageView.image = UIImage(data: content.imageData! as Data)
+                } else {
+                    API.getImage(ext: content.imageUrl!, handler: { data in
+                        DispatchQueue.main.async {
+                            cell.activityIndicator.stopAnimating()
+
+                            content.imageData = data as NSData?
+                            CoreDataStackManager.sharedInstance().saveContext()
+                            cell.imageView.image = UIImage(data: content.imageData! as Data)
+                        }
+                    })
+                }
+            }
+        }
+
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
