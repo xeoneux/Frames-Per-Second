@@ -6,11 +6,13 @@
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
-class MasterViewController: UIViewController, UITabBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class MasterViewController: UIViewController, UITabBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
 
     var contentType: ContentType?
+    var contentCategory: ContentCategory?
 
     @IBOutlet weak var tabBar: UITabBar!
     
@@ -57,40 +59,33 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     }
     
     @IBAction func selectCategory(_ sender: UISegmentedControl) {
-        print("Selected Segment Control: ", sender.titleForSegment(at: sender.selectedSegmentIndex)!)
 
         if let contentType = contentType {
             switch contentType {
             case .tv:
                 switch sender.selectedSegmentIndex {
-                case 0:
-                    API.getContent(contentType: .tv, contentCategory: .popular)
-                case 1:
-                    API.getContent(contentType: .tv, contentCategory: .top_rated)
-                case 2:
-                    API.getContent(contentType: .tv, contentCategory: .on_the_air)
-                case 3:
-                    API.getContent(contentType: .tv, contentCategory: .airing_today)
+                case 0: contentCategory = .popular
+                case 1: contentCategory = .top_rated
+                case 2: contentCategory = .on_the_air
+                case 3: contentCategory = .airing_today
                 default:
                     break
                 }
             case .movie:
                 switch sender.selectedSegmentIndex {
-                case 0:
-                    API.getContent(contentType: .movie, contentCategory: .popular)
-                case 1:
-                    API.getContent(contentType: .movie, contentCategory: .upcoming)
-                case 2:
-                    API.getContent(contentType: .movie, contentCategory: .top_rated)
-                case 3:
-                    API.getContent(contentType: .movie, contentCategory: .now_playing)
+                case 0: contentCategory = .popular
+                case 1: contentCategory = .upcoming
+                case 2: contentCategory = .top_rated
+                case 3: contentCategory = .now_playing
                 default:
                     break
                 }
             case .person:
-                API.getContent(contentType: .person, contentCategory: .popular)
+                contentCategory = .popular
             }
         }
+
+        API.getContent(contentType: contentType!, contentCategory: contentCategory!)
     }
 
     // MARK: Collection View
