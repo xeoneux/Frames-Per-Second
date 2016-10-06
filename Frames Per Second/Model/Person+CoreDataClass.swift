@@ -17,10 +17,9 @@ public class Person: NSManagedObject {
     }
 
     init(data: [String: Any], category: String, insertInto context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "Tv", in: context)!
+        let entity = NSEntityDescription.entity(forEntityName: "Person", in: context)!
         super.init(entity: entity, insertInto: context)
 
-        id = (data["id"] as! Int16)
         name = (data["name"] as! String)
         imageUrl = (data["profile_path"] as! String)
         popularity = (data["popularity"] as! Double)

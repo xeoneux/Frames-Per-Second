@@ -17,13 +17,12 @@ public class Movie: NSManagedObject {
     }
 
     init(data: [String: Any], category: String, insertInto context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "Tv", in: context)!
+        let entity = NSEntityDescription.entity(forEntityName: "Movie", in: context)!
         super.init(entity: entity, insertInto: context)
 
-        id = (data["id"] as! Int16)
         title = (data["title"] as! String)
         overview = (data["overview"] as! String)
-        rating = (data["vote_average"] as! NSDecimalNumber)
+        rating = (data["vote_average"] as! Double)
         imageUrl = (data["poster_path"] as! String)
         releaseDate = (data["release_date"] as! String)
 

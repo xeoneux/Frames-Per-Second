@@ -16,8 +16,7 @@ extension Tv {
         return NSFetchRequest<Tv>(entityName: "Tv");
     }
 
-    @NSManaged public var id: Int16
-    @NSManaged public var rating: NSDecimalNumber?
+    @NSManaged public var rating: Double
     @NSManaged public var releaseDate: String?
     @NSManaged public var imageUrl: String?
     @NSManaged public var imageData: NSData?

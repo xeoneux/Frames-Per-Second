@@ -38,18 +38,20 @@ struct API {
             let context = CoreDataStackManager.sharedInstance().managedObjectContext
             let results = (data as! [String: Any])["results"] as! [[String: Any]]
 
-            for result in results {
-                switch contentType {
-                case .tv:
-                    Tv(data: result, category: contentCategory.rawValue ,insertInto: context)
-                case .movie:
-                    Movie(data: result, category: contentCategory.rawValue ,insertInto: context)
-                case .person:
-                    Person(data: result, category: contentCategory.rawValue ,insertInto: context)
+            DispatchQueue.main.async {
+                for result in results {
+                    switch contentType {
+                    case .tv:
+                        Tv(data: result, category: contentCategory.rawValue ,insertInto: context)
+                    case .movie:
+                        Movie(data: result, category: contentCategory.rawValue ,insertInto: context)
+                    case .person:
+                        Person(data: result, category: contentCategory.rawValue ,insertInto: context)
+                    }
                 }
-            }
 
-            CoreDataStackManager.sharedInstance().saveContext()
+                CoreDataStackManager.sharedInstance().saveContext()
+            }
         })
 
         contentTask.resume()

@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UIViewController, UITabBarDelegate {
 
-    var contentType: ContentType!
+    var contentType: ContentType?
 
     @IBOutlet weak var tabBar: UITabBar!
     
@@ -56,16 +56,39 @@ class MasterViewController: UIViewController, UITabBarDelegate {
     
     @IBAction func selectCategory(_ sender: UISegmentedControl) {
         print("Selected Segment Control: ", sender.titleForSegment(at: sender.selectedSegmentIndex)!)
-    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let contentType = contentType {
+            switch contentType {
+            case .tv:
+                switch sender.selectedSegmentIndex {
+                case 0:
+                    API.getContent(contentType: .tv, contentCategory: .popular)
+                case 1:
+                    API.getContent(contentType: .tv, contentCategory: .top_rated)
+                case 2:
+                    API.getContent(contentType: .tv, contentCategory: .on_the_air)
+                case 3:
+                    API.getContent(contentType: .tv, contentCategory: .airing_today)
+                default:
+                    break
+                }
+            case .movie:
+                switch sender.selectedSegmentIndex {
+                case 0:
+                    API.getContent(contentType: .movie, contentCategory: .popular)
+                case 1:
+                    API.getContent(contentType: .movie, contentCategory: .upcoming)
+                case 2:
+                    API.getContent(contentType: .movie, contentCategory: .top_rated)
+                case 3:
+                    API.getContent(contentType: .movie, contentCategory: .now_playing)
+                default:
+                    break
+                }
+            case .person:
+                API.getContent(contentType: .person, contentCategory: .popular)
+            }
+        }
     }
-    */
 
 }

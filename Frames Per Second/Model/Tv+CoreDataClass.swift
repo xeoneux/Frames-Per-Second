@@ -20,10 +20,9 @@ public class Tv: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: "Tv", in: context)!
         super.init(entity: entity, insertInto: context)
 
-        id = (data["id"] as! Int16)
         title = (data["name"] as! String)
         overview = (data["overview"] as! String)
-        rating = (data["vote_average"] as! NSDecimalNumber)
+        rating = (data["vote_average"] as! Double)
         imageUrl = (data["poster_path"] as! String)
         releaseDate = (data["first_air_date"] as! String)
 
