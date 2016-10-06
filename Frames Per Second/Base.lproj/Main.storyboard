@@ -34,8 +34,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="TV Shows" id="sIF-TX-h2V"/>
-                                    <tabBarItem title="Movies" id="A7H-Qe-rWO"/>
-                                    <tabBarItem title="People" id="eRU-cH-EL6"/>
+                                    <tabBarItem tag="1" title="Movies" id="A7H-Qe-rWO"/>
+                                    <tabBarItem tag="2" title="People" id="eRU-cH-EL6"/>
                                 </items>
                             </tabBar>
                         </subviews>
