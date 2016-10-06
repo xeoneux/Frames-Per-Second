@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UIViewController {
 
-    var type: Type!
+    var type: ContentType!
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 

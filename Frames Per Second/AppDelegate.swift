@@ -44,6 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-enum Type {
+enum ContentType {
     case tv, movie, person
 }
