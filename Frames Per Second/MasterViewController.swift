@@ -41,6 +41,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
     func setupUserDefaults() {
         let contentType = UserDefaults.standard.string(forKey: "contentType")
+        let contentCategory = UserDefaults.standard.string(forKey: "contentCategory")
+        let selectedSegment = UserDefaults.standard.integer(forKey: "selectedSegment")
+
         if contentType != nil {
             self.contentType = ContentType(rawValue: contentType!)!
 
@@ -61,11 +64,8 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             }
         }
 
-        let contentCategory = UserDefaults.standard.string(forKey: "contentCategory")
         if contentCategory != nil {
             self.contentCategory = ContentCategory(rawValue: contentCategory!)!
-
-            let selectedSegment = UserDefaults.standard.integer(forKey: "selectedSegment")
             self.segmentedControl.selectedSegmentIndex = selectedSegment
         }
     }
@@ -143,6 +143,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             break
         }
 
+        print("set contentType as: \(contentType.rawValue)")
         UserDefaults.standard.set(contentType.rawValue, forKey: "contentType")
         segmentedControl.selectedSegmentIndex = 0
         selectCategory(segmentedControl)
@@ -154,7 +155,10 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         let category = title.lowercased().replacingOccurrences(of: " ", with: "_")
 
         contentCategory = ContentCategory(rawValue: category)!
+
+        print("set contentCategory as: \(category)")
         UserDefaults.standard.set(category, forKey: "contentCategory")
+        print("set selectedSegment as: \(segmentedControl.selectedSegmentIndex)")
         UserDefaults.standard.set(segmentedControl.selectedSegmentIndex, forKey: "selectedSegment")
 
         setupFetchedResultsController()
