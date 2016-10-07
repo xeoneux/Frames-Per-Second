@@ -45,6 +45,40 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
     }
+    
+    @IBAction func reloadData(_ sender: AnyObject) {
+        API.getContent(contentType: contentType!, contentCategory: contentCategory!, handler: {
+
+            let results = $0["results"] as! [[String: Any]]
+            let contentType = $0["contentType"] as! ContentType
+            let contentCategory = $0["contentCategory"] as! ContentCategory
+            let context = CoreDataStackManager.sharedInstance().managedObjectContext
+
+            DispatchQueue.main.async {
+                switch contentType {
+                case .tv:
+                    (self.fetchedResultsController.fetchedObjects as! [Tv]).forEach { context.delete($0) }
+                    results.forEach { result in
+                        Tv(data: result, category: contentCategory.rawValue, insertInto: context)
+                    }
+                case .movie:
+                    (self.fetchedResultsController.fetchedObjects as! [Movie]).forEach { context.delete($0) }
+                    results.forEach { result in
+                        Movie(data: result, category: contentCategory.rawValue, insertInto: context)
+                    }
+                case .person:
+                    (self.fetchedResultsController.fetchedObjects as! [Person]).forEach { context.delete($0) }
+                    results.forEach { result in
+                        Person(data: result, category: contentCategory.rawValue, insertInto: context)
+                    }
+                }
+
+                CoreDataStackManager.sharedInstance().saveContext()
+                try! self.fetchedResultsController.performFetch()
+                self.collectionView.reloadData()
+            }
+        })
+    }
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 
@@ -101,10 +135,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             }
         }
 
-        API.getContent(contentType: contentType!, contentCategory: contentCategory!)
-
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
+        collectionView.reloadData()
         print(fetchedResultsController.fetchedObjects?.count)
     }
 

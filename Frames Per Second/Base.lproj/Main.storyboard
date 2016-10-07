@@ -88,7 +88,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="dgu-zc-LdH" secondAttribute="trailing" constant="-16" id="t97-qW-b6g"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Frames Per Second" id="hc3-Zx-R9F"/>
+                    <navigationItem key="navigationItem" title="Frames Per Second" id="hc3-Zx-R9F">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Feg-Yl-kiI">
+                            <connections>
+                                <action selector="reloadData:" destination="BYZ-38-t0r" id="8pP-cQ-jzC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="7PJ-Tr-aEq" id="q9t-KJ-Z3w"/>
                         <outlet property="movieTab" destination="A7H-Qe-rWO" id="qo9-Yf-SMQ"/>
