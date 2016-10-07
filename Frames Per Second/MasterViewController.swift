@@ -11,8 +11,9 @@ import UIKit
 
 class MasterViewController: UIViewController, UITabBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
 
-    var contentType: ContentType? = [ContentType.tv, ContentType.movie, ContentType.person][Int(arc4random_uniform(3))]
-    var contentCategory: ContentCategory?
+    // Set default values
+    var contentType: ContentType = .tv
+    var contentCategory: ContentCategory = .popular
 
     @IBOutlet weak var tabBar: UITabBar!
     
@@ -30,7 +31,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
-        print(fetchedResultsController.fetchedObjects?.count)
+        print(fetchedResultsController.fetchedObjects!.count)
 
         tabBar.delegate = self
         collectionView.delegate = self
@@ -38,8 +39,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     }
 
     func setupFetchedResultsController() {
-        let entityName = contentType!.rawValue.capitalized
+        let entityName = contentType.rawValue.capitalized
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "category = %@", contentCategory.rawValue)
         fetchRequest.sortDescriptors = []
 
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
@@ -47,7 +49,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     }
     
     @IBAction func reloadData(_ sender: AnyObject) {
-        API.getContent(contentType: contentType!, contentCategory: contentCategory!, handler: {
+        API.getContent(contentType: contentType, contentCategory: contentCategory, handler: {
 
             let results = $0["results"] as! [[String: Any]]
             let contentType = $0["contentType"] as! ContentType
@@ -110,35 +112,34 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     
     @IBAction func selectCategory(_ sender: UISegmentedControl) {
 
-        if let contentType = contentType {
-            switch contentType {
-            case .tv:
-                switch sender.selectedSegmentIndex {
-                case 0: contentCategory = .popular
-                case 1: contentCategory = .top_rated
-                case 2: contentCategory = .on_the_air
-                case 3: contentCategory = .airing_today
-                default:
-                    break
-                }
-            case .movie:
-                switch sender.selectedSegmentIndex {
-                case 0: contentCategory = .popular
-                case 1: contentCategory = .upcoming
-                case 2: contentCategory = .top_rated
-                case 3: contentCategory = .now_playing
-                default:
-                    break
-                }
-            case .person:
-                contentCategory = .popular
+        switch contentType {
+        case .tv:
+            switch sender.selectedSegmentIndex {
+            case 0: contentCategory = .popular
+            case 1: contentCategory = .top_rated
+            case 2: contentCategory = .on_the_air
+            case 3: contentCategory = .airing_today
+            default:
+                break
             }
+        case .movie:
+            switch sender.selectedSegmentIndex {
+            case 0: contentCategory = .popular
+            case 1: contentCategory = .upcoming
+            case 2: contentCategory = .top_rated
+            case 3: contentCategory = .now_playing
+            default:
+                break
+            }
+        case .person:
+            contentCategory = .popular
         }
 
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
+        print(fetchedResultsController.fetchedObjects!.count)
+
         collectionView.reloadData()
-        print(fetchedResultsController.fetchedObjects?.count)
     }
 
     // MARK: Collection View
@@ -152,59 +153,57 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
         cell.activityIndicator.startAnimating()
 
-        if let contentType = contentType {
-            switch contentType {
-            case .tv:
-                let content = fetchedResultsController.object(at: indexPath) as! Tv
-                if content.imageData != nil {
-                    cell.activityIndicator.stopAnimating()
+        switch contentType {
+        case .tv:
+            let content = fetchedResultsController.object(at: indexPath) as! Tv
+            if content.imageData != nil {
+                cell.activityIndicator.stopAnimating()
 
-                    cell.imageView.image = UIImage(data: content.imageData! as Data)
-                } else {
-                    API.getImage(ext: content.imageUrl!, handler: { data in
-                        DispatchQueue.main.async {
-                            cell.activityIndicator.stopAnimating()
+                cell.imageView.image = UIImage(data: content.imageData! as Data)
+            } else {
+                API.getImage(ext: content.imageUrl!, handler: { data in
+                    DispatchQueue.main.async {
+                        cell.activityIndicator.stopAnimating()
 
-                            content.imageData = data as NSData?
-                            CoreDataStackManager.sharedInstance().saveContext()
-                            cell.imageView.image = UIImage(data: content.imageData! as Data)
-                        }
-                    })
-                }
-            case .movie:
-                let content = fetchedResultsController.object(at: indexPath) as! Movie
-                if content.imageData != nil {
-                    cell.activityIndicator.stopAnimating()
+                        content.imageData = data as NSData?
+                        CoreDataStackManager.sharedInstance().saveContext()
+                        cell.imageView.image = UIImage(data: content.imageData! as Data)
+                    }
+                })
+            }
+        case .movie:
+            let content = fetchedResultsController.object(at: indexPath) as! Movie
+            if content.imageData != nil {
+                cell.activityIndicator.stopAnimating()
 
-                    cell.imageView.image = UIImage(data: content.imageData! as Data)
-                } else {
-                    API.getImage(ext: content.imageUrl!, handler: { data in
-                        DispatchQueue.main.async {
-                            cell.activityIndicator.stopAnimating()
+                cell.imageView.image = UIImage(data: content.imageData! as Data)
+            } else {
+                API.getImage(ext: content.imageUrl!, handler: { data in
+                    DispatchQueue.main.async {
+                        cell.activityIndicator.stopAnimating()
 
-                            content.imageData = data as NSData?
-                            CoreDataStackManager.sharedInstance().saveContext()
-                            cell.imageView.image = UIImage(data: content.imageData! as Data)
-                        }
-                    })
-                }
-            case .person:
-                let content = fetchedResultsController.object(at: indexPath) as! Person
-                if content.imageData != nil {
-                    cell.activityIndicator.stopAnimating()
+                        content.imageData = data as NSData?
+                        CoreDataStackManager.sharedInstance().saveContext()
+                        cell.imageView.image = UIImage(data: content.imageData! as Data)
+                    }
+                })
+            }
+        case .person:
+            let content = fetchedResultsController.object(at: indexPath) as! Person
+            if content.imageData != nil {
+                cell.activityIndicator.stopAnimating()
 
-                    cell.imageView.image = UIImage(data: content.imageData! as Data)
-                } else {
-                    API.getImage(ext: content.imageUrl!, handler: { data in
-                        DispatchQueue.main.async {
-                            cell.activityIndicator.stopAnimating()
+                cell.imageView.image = UIImage(data: content.imageData! as Data)
+            } else {
+                API.getImage(ext: content.imageUrl!, handler: { data in
+                    DispatchQueue.main.async {
+                        cell.activityIndicator.stopAnimating()
 
-                            content.imageData = data as NSData?
-                            CoreDataStackManager.sharedInstance().saveContext()
-                            cell.imageView.image = UIImage(data: content.imageData! as Data)
-                        }
-                    })
-                }
+                        content.imageData = data as NSData?
+                        CoreDataStackManager.sharedInstance().saveContext()
+                        cell.imageView.image = UIImage(data: content.imageData! as Data)
+                    }
+                })
             }
         }
 

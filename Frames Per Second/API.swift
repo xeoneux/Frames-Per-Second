@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum ContentType: String {
+    case tv
+    case movie
+    case person
+}
+
 enum ContentCategory: String {
     case popular
     case upcoming

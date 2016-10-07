@@ -43,7 +43,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
-enum ContentType: String {
-    case tv, movie, person
-}
