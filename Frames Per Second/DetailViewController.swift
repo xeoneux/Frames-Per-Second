@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     var content: Any!
     var contentType: ContentType?
 
+    @IBOutlet weak var info: UIButton!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
@@ -29,16 +30,25 @@ class DetailViewController: UIViewController {
                 label.text = content.title
                 textView.text = content.overview
                 imageView.image = UIImage(data: content.imageData as! Data)
+
+                let info = "Release Date: \(content.releaseDate!) Rating: \(content.rating)"
+                self.info.setTitle(info, for: .disabled)
             case .movie:
                 let content = self.content as! Movie
                 label.text = content.title
                 textView.text = content.overview
                 imageView.image = UIImage(data: content.imageData as! Data)
+
+                let info = "Release Date: \(content.releaseDate!) Rating: \(content.rating)"
+                self.info.setTitle(info, for: .disabled)
             case .person:
-            let content = self.content as! Person
-            label.text = content.name
-            textView.text = ""
-            imageView.image = UIImage(data: content.imageData as! Data)
+                let content = self.content as! Person
+                label.text = content.name
+                textView.text = ""
+                imageView.image = UIImage(data: content.imageData as! Data)
+
+                let info = "Popularity: \(content.popularity)"
+                self.info.setTitle(info, for: .disabled)
             }
         }
     }

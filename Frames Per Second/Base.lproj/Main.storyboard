@@ -140,28 +140,37 @@
                                     <action selector="dismiss:" destination="mpS-Ng-MKF" eventType="touchUpInside" id="SYV-G7-s48"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ivQ-ex-2qc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ivQ-ex-2qc">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="yX0-fb-6zo"/>
+                                    <constraint firstAttribute="height" constant="80" id="yX0-fb-6zo"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU6-OW-Tc1">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="QgD-cN-GUn"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="iU6-OW-Tc1" firstAttribute="top" secondItem="Acc-JW-teT" secondAttribute="bottom" constant="8" id="1DB-AT-RfL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Acc-JW-teT" secondAttribute="trailing" id="3tM-Wv-Qz7"/>
                             <constraint firstItem="vqI-k1-Jw8" firstAttribute="leading" secondItem="Zkd-aZ-3dZ" secondAttribute="leadingMargin" id="4pY-gk-XnT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vqI-k1-Jw8" secondAttribute="trailing" id="9VT-Iu-xG6"/>
                             <constraint firstItem="FAc-pE-t4B" firstAttribute="top" secondItem="ivQ-ex-2qc" secondAttribute="bottom" constant="8" id="BsZ-UW-9cW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iU6-OW-Tc1" secondAttribute="trailing" id="Gma-EK-hf5"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Acc-JW-teT" secondAttribute="leading" id="KZa-sJ-SLe"/>
                             <constraint firstAttribute="leadingMargin" secondItem="FAc-pE-t4B" secondAttribute="leading" id="OYI-0s-7vh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ivQ-ex-2qc" secondAttribute="leading" id="WDv-hp-p1h"/>
+                            <constraint firstItem="ivQ-ex-2qc" firstAttribute="top" secondItem="iU6-OW-Tc1" secondAttribute="bottom" constant="8" id="ZvA-ej-Xz7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ivQ-ex-2qc" secondAttribute="trailing" id="cAs-2e-dWY"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="iU6-OW-Tc1" secondAttribute="leading" id="duc-Fr-xau"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FAc-pE-t4B" secondAttribute="trailing" id="igu-No-bHS"/>
-                            <constraint firstItem="ivQ-ex-2qc" firstAttribute="top" secondItem="Acc-JW-teT" secondAttribute="bottom" constant="8" id="nhU-ai-Epw"/>
                             <constraint firstItem="YGK-gR-WiW" firstAttribute="top" secondItem="FAc-pE-t4B" secondAttribute="bottom" constant="8" id="oDO-TC-EbY"/>
                             <constraint firstItem="vqI-k1-Jw8" firstAttribute="top" secondItem="dfp-he-iat" secondAttribute="bottom" id="qWk-0w-wDz"/>
                             <constraint firstItem="Acc-JW-teT" firstAttribute="top" secondItem="vqI-k1-Jw8" secondAttribute="bottom" constant="8" id="rte-qc-FWw"/>
@@ -170,6 +179,7 @@
                     <connections>
                         <outlet property="closeButton" destination="FAc-pE-t4B" id="PKe-rG-qef"/>
                         <outlet property="imageView" destination="Acc-JW-teT" id="AJR-Os-bNY"/>
+                        <outlet property="info" destination="iU6-OW-Tc1" id="dXg-3j-B22"/>
                         <outlet property="label" destination="vqI-k1-Jw8" id="zRd-mK-sLc"/>
                         <outlet property="textView" destination="ivQ-ex-2qc" id="Ot0-mP-5Oo"/>
                     </connections>
