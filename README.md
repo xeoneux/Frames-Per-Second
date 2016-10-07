@@ -2,6 +2,8 @@
 
 iOS app to get information about movies and tv shows.
 
+![Frames Per Second](https://cloud.githubusercontent.com/assets/3099626/19207998/07a2add8-8d41-11e6-9a54-7d2980cd0ca0.png)
+
 ## Requirements
 
 * Xcode 8 with Swift 3
