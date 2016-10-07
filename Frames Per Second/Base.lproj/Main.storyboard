@@ -97,6 +97,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="7PJ-Tr-aEq" id="q9t-KJ-Z3w"/>
+                        <outlet property="flowLayout" destination="Cmv-De-6c2" id="Raz-Xi-uXZ"/>
                         <outlet property="movieTab" destination="A7H-Qe-rWO" id="qo9-Yf-SMQ"/>
                         <outlet property="personTab" destination="eRU-cH-EL6" id="TMN-Rs-9bd"/>
                         <outlet property="refreshButton" destination="Feg-Yl-kiI" id="SZl-uV-Vad"/>

@@ -18,7 +18,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     var contentCategory: ContentCategory = .popular
 
     @IBOutlet weak var tabBar: UITabBar!
-    
+
     @IBOutlet weak var tvTab: UITabBarItem!
     @IBOutlet weak var movieTab: UITabBarItem!
     @IBOutlet weak var personTab: UITabBarItem!
@@ -26,7 +26,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
 
     override func viewDidLoad() {
@@ -35,6 +35,14 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         setupUserDefaults()
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
+
+        let space = CGFloat(3.0)
+        let width = Double(self.view.frame.size.width)
+        let dimension = CGFloat((width - (2 * Double(space))) / 3.0)
+
+        flowLayout.minimumLineSpacing = space
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
 
         tabBar.delegate = self
         collectionView.delegate = self
