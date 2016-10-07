@@ -109,6 +109,24 @@
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="138.98050974512745"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="r8i-a5-9oa">
+            <objects>
+                <viewController id="mpS-Ng-MKF" customClass="DetailViewController" customModule="Frames_Per_Second" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dfp-he-iat"/>
+                        <viewControllerLayoutGuide type="bottom" id="YGK-gR-WiW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zkd-aZ-3dZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5H2-8P-HHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="873" y="139"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="AbO-Ya-x4G">
             <objects>

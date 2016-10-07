@@ -131,16 +131,14 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             switch item.tag {
             case 0:
                 contentType = .tv
-                segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
-                segmentedControl.insertSegment(withTitle: "Top Rated", at: 1, animated: true)
-                segmentedControl.insertSegment(withTitle: "On The Air", at: 2, animated: true)
-                segmentedControl.insertSegment(withTitle: "Airing Today", at: 3, animated: true)
+                for (index, title) in ["Popular", "Top Rated", "On The Air", "Airing Today"].enumerated() {
+                    segmentedControl.insertSegment(withTitle: title, at: index, animated: true)
+                }
             case 1:
                 contentType = .movie
-                segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
-                segmentedControl.insertSegment(withTitle: "Upcoming", at: 1, animated: true)
-                segmentedControl.insertSegment(withTitle: "Top Rated", at: 2, animated: true)
-                segmentedControl.insertSegment(withTitle: "Now Playing", at: 3, animated: true)
+                for (index, title) in ["Popular", "Upcoming", "Top Rated", "Now Playing"].enumerated() {
+                    segmentedControl.insertSegment(withTitle: title, at: index, animated: true)
+                }
             case 2:
                 contentType = .person
                 segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
@@ -173,6 +171,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     // MARK: Collection View
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if fetchedResultsController.fetchedObjects!.count == 0 {
+            reloadData(collectionView)
+        }
         return fetchedResultsController.fetchedObjects!.count
     }
 
@@ -239,7 +240,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
     }
 
 }
