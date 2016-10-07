@@ -27,10 +27,15 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
 
         setupUserDefaults()
         setupFetchedResultsController()
@@ -111,10 +116,11 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
     }
-    
+
     @IBAction func reloadData(_ sender: AnyObject) {
 
         refreshButton.isEnabled = false
+        activityIndicator.startAnimating()
 
         API.getContent(contentType: contentType, contentCategory: contentCategory, handler: {
 
@@ -124,6 +130,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
             DispatchQueue.main.async {
+
+                self.activityIndicator.stopAnimating()
+
                 switch contentType {
                 case .tv:
                     (self.fetchedResultsController.fetchedObjects as! [Tv]).forEach { context.delete($0) }
