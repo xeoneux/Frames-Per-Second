@@ -112,28 +112,10 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     
     @IBAction func selectCategory(_ sender: UISegmentedControl) {
 
-        switch contentType {
-        case .tv:
-            switch sender.selectedSegmentIndex {
-            case 0: contentCategory = .popular
-            case 1: contentCategory = .top_rated
-            case 2: contentCategory = .on_the_air
-            case 3: contentCategory = .airing_today
-            default:
-                break
-            }
-        case .movie:
-            switch sender.selectedSegmentIndex {
-            case 0: contentCategory = .popular
-            case 1: contentCategory = .upcoming
-            case 2: contentCategory = .top_rated
-            case 3: contentCategory = .now_playing
-            default:
-                break
-            }
-        case .person:
-            contentCategory = .popular
-        }
+        let title = sender.titleForSegment(at: sender.selectedSegmentIndex)!
+        let category = title.lowercased().replacingOccurrences(of: " ", with: "_")
+
+        contentCategory = ContentCategory(rawValue: category)!
 
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
