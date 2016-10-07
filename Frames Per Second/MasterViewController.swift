@@ -49,6 +49,28 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         fetchedResultsController.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.displayAlert), name: Notification.Name(rawValue: "NetworkError"), object: nil)
+    }
+
+    func displayAlert() {
+        print("here")
+        let alertController = UIAlertController(title: "Network Error", message: "A network error occured. Please make sure you're connected to the internet and try again.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(action)
+
+        present(alertController, animated: true, completion: nil)
+        refreshButton.isEnabled = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "NetworkError"), object: nil)
+    }
+
     func setupUserDefaults() {
         let contentType = UserDefaults.standard.string(forKey: "contentType")
         let contentCategory = UserDefaults.standard.string(forKey: "contentCategory")

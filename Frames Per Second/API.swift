@@ -37,7 +37,8 @@ struct API {
         let contentTask = session.dataTask(with: URL(string: url)!, completionHandler: {
 
             guard $0.2 == nil else {
-                fatalError("Error: Unable to get content...")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "NetworkError"), object: nil)
+                return
             }
 
             let json = try! JSONSerialization.jsonObject(with: $0.0!, options: .allowFragments)
@@ -62,7 +63,8 @@ struct API {
         let imageTask = session.dataTask(with: URL(string: url)!, completionHandler: {
 
             guard $0.2 == nil else {
-                fatalError("Error: Unable to get image...")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "NetworkError"), object: nil)
+                return
             }
 
             handler($0.0!)
