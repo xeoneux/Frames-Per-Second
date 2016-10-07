@@ -31,9 +31,9 @@
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgu-zc-LdH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem title="TV Shows" id="sIF-TX-h2V"/>
-                                    <tabBarItem tag="1" title="Movies" id="A7H-Qe-rWO"/>
-                                    <tabBarItem tag="2" title="People" id="eRU-cH-EL6"/>
+                                    <tabBarItem title="TV Shows" image="tv" id="sIF-TX-h2V"/>
+                                    <tabBarItem tag="1" title="Movies" image="movie" id="A7H-Qe-rWO"/>
+                                    <tabBarItem tag="2" title="People" image="person" id="eRU-cH-EL6"/>
                                 </items>
                             </tabBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7PJ-Tr-aEq">
@@ -145,4 +145,9 @@
             <point key="canvasLocation" x="-748" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="movie" width="24" height="24"/>
+        <image name="person" width="24" height="24"/>
+        <image name="tv" width="24" height="24"/>
+    </resources>
 </document>

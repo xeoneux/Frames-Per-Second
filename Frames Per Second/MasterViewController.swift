@@ -140,12 +140,12 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             case 0:
                 contentType = .tv
                 for (index, title) in ["Popular", "Top Rated", "On The Air", "Airing Today"].enumerated() {
-                    segmentedControl.insertSegment(withTitle: title, at: index, animated: true)
+                    segmentedControl.insertSegment(withTitle: title, at: index, animated: false)
                 }
             case 1:
                 contentType = .movie
                 for (index, title) in ["Popular", "Upcoming", "Top Rated", "Now Playing"].enumerated() {
-                    segmentedControl.insertSegment(withTitle: title, at: index, animated: true)
+                    segmentedControl.insertSegment(withTitle: title, at: index, animated: false)
                 }
             case 2:
                 contentType = .person
