@@ -21,6 +21,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     @IBOutlet weak var movieTab: UITabBarItem!
     @IBOutlet weak var personTab: UITabBarItem!
 
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
@@ -29,13 +30,44 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUserDefaults()
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
-        print(fetchedResultsController.fetchedObjects!.count)
 
         tabBar.delegate = self
         collectionView.delegate = self
         fetchedResultsController.delegate = self
+    }
+
+    func setupUserDefaults() {
+        let contentType = UserDefaults.standard.string(forKey: "contentType")
+        if contentType != nil {
+            self.contentType = ContentType(rawValue: contentType!)!
+
+            // Set tag
+            let tag: Int
+            switch self.contentType {
+            case .tv: tag = 0
+            case .movie: tag = 1
+            case .person: tag = 2
+            }
+
+            // Find tab bar with tag
+            self.tabBar.items!.forEach {
+                if tag == $0.tag {
+                    self.tabBar.selectedItem = $0
+                    self.tabBar(self.tabBar, didSelect: $0)
+                }
+            }
+        }
+
+        let contentCategory = UserDefaults.standard.string(forKey: "contentCategory")
+        if contentCategory != nil {
+            self.contentCategory = ContentCategory(rawValue: contentCategory!)!
+
+            let selectedSegment = UserDefaults.standard.integer(forKey: "selectedSegment")
+            self.segmentedControl.selectedSegmentIndex = selectedSegment
+        }
     }
 
     func setupFetchedResultsController() {
@@ -49,6 +81,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     }
     
     @IBAction func reloadData(_ sender: AnyObject) {
+
+        refreshButton.isEnabled = false
+
         API.getContent(contentType: contentType, contentCategory: contentCategory, handler: {
 
             let results = $0["results"] as! [[String: Any]]
@@ -77,7 +112,9 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
                 CoreDataStackManager.sharedInstance().saveContext()
                 try! self.fetchedResultsController.performFetch()
+
                 self.collectionView.reloadData()
+                self.refreshButton.isEnabled = true
             }
         })
     }
@@ -106,6 +143,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
             break
         }
 
+        UserDefaults.standard.set(contentType.rawValue, forKey: "contentType")
         segmentedControl.selectedSegmentIndex = 0
         selectCategory(segmentedControl)
     }
@@ -116,10 +154,11 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         let category = title.lowercased().replacingOccurrences(of: " ", with: "_")
 
         contentCategory = ContentCategory(rawValue: category)!
+        UserDefaults.standard.set(category, forKey: "contentCategory")
+        UserDefaults.standard.set(segmentedControl.selectedSegmentIndex, forKey: "selectedSegment")
 
         setupFetchedResultsController()
         try! fetchedResultsController.performFetch()
-        print(fetchedResultsController.fetchedObjects!.count)
 
         collectionView.reloadData()
     }

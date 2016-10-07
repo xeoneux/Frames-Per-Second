@@ -99,6 +99,7 @@
                         <outlet property="collectionView" destination="7PJ-Tr-aEq" id="q9t-KJ-Z3w"/>
                         <outlet property="movieTab" destination="A7H-Qe-rWO" id="qo9-Yf-SMQ"/>
                         <outlet property="personTab" destination="eRU-cH-EL6" id="TMN-Rs-9bd"/>
+                        <outlet property="refreshButton" destination="Feg-Yl-kiI" id="SZl-uV-Vad"/>
                         <outlet property="segmentedControl" destination="ahr-uo-oYA" id="ZDN-1Y-SjU"/>
                         <outlet property="tabBar" destination="dgu-zc-LdH" id="KuT-0E-79x"/>
                         <outlet property="tvTab" destination="sIF-TX-h2V" id="jRp-iR-mUk"/>
