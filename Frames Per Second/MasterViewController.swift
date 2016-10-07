@@ -11,6 +11,8 @@ import UIKit
 
 class MasterViewController: UIViewController, UITabBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
 
+    var selectedTabTitle = ""
+
     // Set default values
     var contentType: ContentType = .tv
     var contentCategory: ContentCategory = .popular
@@ -121,32 +123,36 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 
-        segmentedControl.removeAllSegments()
+        if item.title != selectedTabTitle {
 
-        switch item.tag {
-        case 0:
-            contentType = .tv
-            segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
-            segmentedControl.insertSegment(withTitle: "Top Rated", at: 1, animated: true)
-            segmentedControl.insertSegment(withTitle: "On The Air", at: 2, animated: true)
-            segmentedControl.insertSegment(withTitle: "Airing Today", at: 3, animated: true)
-        case 1:
-            contentType = .movie
-            segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
-            segmentedControl.insertSegment(withTitle: "Upcoming", at: 1, animated: true)
-            segmentedControl.insertSegment(withTitle: "Top Rated", at: 2, animated: true)
-            segmentedControl.insertSegment(withTitle: "Now Playing", at: 3, animated: true)
-        case 2:
-            contentType = .person
-            segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
-        default:
-            break
+            selectedTabTitle = item.title!
+            segmentedControl.removeAllSegments()
+
+            switch item.tag {
+            case 0:
+                contentType = .tv
+                segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
+                segmentedControl.insertSegment(withTitle: "Top Rated", at: 1, animated: true)
+                segmentedControl.insertSegment(withTitle: "On The Air", at: 2, animated: true)
+                segmentedControl.insertSegment(withTitle: "Airing Today", at: 3, animated: true)
+            case 1:
+                contentType = .movie
+                segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
+                segmentedControl.insertSegment(withTitle: "Upcoming", at: 1, animated: true)
+                segmentedControl.insertSegment(withTitle: "Top Rated", at: 2, animated: true)
+                segmentedControl.insertSegment(withTitle: "Now Playing", at: 3, animated: true)
+            case 2:
+                contentType = .person
+                segmentedControl.insertSegment(withTitle: "Popular", at: 0, animated: true)
+            default:
+                break
+            }
+
+            UserDefaults.standard.set(contentType.rawValue, forKey: "contentType")
+            segmentedControl.selectedSegmentIndex = 0
+            selectCategory(segmentedControl)
         }
 
-        print("set contentType as: \(contentType.rawValue)")
-        UserDefaults.standard.set(contentType.rawValue, forKey: "contentType")
-        segmentedControl.selectedSegmentIndex = 0
-        selectCategory(segmentedControl)
     }
     
     @IBAction func selectCategory(_ sender: UISegmentedControl) {
@@ -155,10 +161,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
         let category = title.lowercased().replacingOccurrences(of: " ", with: "_")
 
         contentCategory = ContentCategory(rawValue: category)!
-
-        print("set contentCategory as: \(category)")
         UserDefaults.standard.set(category, forKey: "contentCategory")
-        print("set selectedSegment as: \(segmentedControl.selectedSegmentIndex)")
         UserDefaults.standard.set(segmentedControl.selectedSegmentIndex, forKey: "selectedSegment")
 
         setupFetchedResultsController()
