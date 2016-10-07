@@ -112,7 +112,7 @@
         <!--Detail View Controller-->
         <scene sceneID="r8i-a5-9oa">
             <objects>
-                <viewController id="mpS-Ng-MKF" customClass="DetailViewController" customModule="Frames_Per_Second" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="mpS-Ng-MKF" customClass="DetailViewController" customModule="Frames_Per_Second" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dfp-he-iat"/>
                         <viewControllerLayoutGuide type="bottom" id="YGK-gR-WiW"/>

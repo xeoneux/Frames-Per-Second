@@ -240,7 +240,15 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
+        let content = fetchedResultsController.object(at: indexPath)
+        let contentType = self.contentType
+
+        let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailViewController.content = content
+        detailViewController.contentType = contentType
+        detailViewController.modalTransitionStyle = .crossDissolve
+        present(detailViewController, animated: true, completion: nil)
     }
 
 }
