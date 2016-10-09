@@ -229,7 +229,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
                 cell.imageView.image = UIImage(data: content.imageData! as Data)
             } else {
-                API.getImage(ext: content.imageUrl!, handler: { data in
+                API.getImage(ext: content.imageUrl, handler: { data in
                     DispatchQueue.main.async {
                         cell.activityIndicator.stopAnimating()
 
@@ -246,7 +246,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
                 cell.imageView.image = UIImage(data: content.imageData! as Data)
             } else {
-                API.getImage(ext: content.imageUrl!, handler: { data in
+                API.getImage(ext: content.imageUrl, handler: { data in
                     DispatchQueue.main.async {
                         cell.activityIndicator.stopAnimating()
 
@@ -263,7 +263,7 @@ class MasterViewController: UIViewController, UITabBarDelegate, UICollectionView
 
                 cell.imageView.image = UIImage(data: content.imageData! as Data)
             } else {
-                API.getImage(ext: content.imageUrl!, handler: { data in
+                API.getImage(ext: content.imageUrl, handler: { data in
                     DispatchQueue.main.async {
                         cell.activityIndicator.stopAnimating()
 

@@ -23,7 +23,7 @@ public class Movie: NSManagedObject {
         title = (data["title"] as! String)
         overview = (data["overview"] as! String)
         rating = (data["vote_average"] as! Double)
-        imageUrl = (data["poster_path"] as! String)
+        imageUrl = (data["poster_path"] as? String)
         releaseDate = (data["release_date"] as! String)
 
         self.category = category

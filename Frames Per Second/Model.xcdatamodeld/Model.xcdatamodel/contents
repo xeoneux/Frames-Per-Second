@@ -3,7 +3,7 @@
     <entity name="Movie" representedClassName=".Movie" syncable="YES">
         <attribute name="category" attributeType="String" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="imageUrl" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="overview" attributeType="String" syncable="YES"/>
         <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="releaseDate" attributeType="String" syncable="YES"/>
@@ -12,22 +12,22 @@
     <entity name="Person" representedClassName=".Person" syncable="YES">
         <attribute name="category" attributeType="String" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="imageUrl" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="popularity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Tv" representedClassName=".Tv" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="imageUrl" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="overview" attributeType="String" syncable="YES"/>
         <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="releaseDate" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Movie" positionX="-36" positionY="9" width="128" height="150"/>
         <element name="Person" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Tv" positionX="-54" positionY="-9" width="128" height="150"/>
-        <element name="Movie" positionX="-36" positionY="9" width="128" height="150"/>
     </elements>
 </model>

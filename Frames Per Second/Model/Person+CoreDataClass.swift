@@ -21,7 +21,7 @@ public class Person: NSManagedObject {
         super.init(entity: entity, insertInto: context)
 
         name = (data["name"] as! String)
-        imageUrl = (data["profile_path"] as! String)
+        imageUrl = (data["profile_path"] as? String)
         popularity = (data["popularity"] as! Double)
 
         self.category = category

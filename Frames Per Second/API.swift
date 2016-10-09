@@ -55,8 +55,15 @@ struct API {
         contentTask.resume()
     }
 
-    static func getImage(ext: String, handler: @escaping (_ imageData: Data) -> Void) {
-        let url = "\(image_url)/\(ext)"
+    static func getImage(ext: String?, handler: @escaping (_ imageData: Data) -> Void) {
+
+        let url: String
+
+        if let ext = ext {
+            url = "\(image_url)/\(ext)"
+        } else {
+            url = "https://placehold.it/500x500"
+        }
 
         let session = URLSession.shared
 

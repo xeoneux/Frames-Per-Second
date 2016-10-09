@@ -23,7 +23,7 @@ public class Tv: NSManagedObject {
         title = (data["name"] as! String)
         overview = (data["overview"] as! String)
         rating = (data["vote_average"] as! Double)
-        imageUrl = (data["poster_path"] as! String)
+        imageUrl = (data["poster_path"] as? String)
         releaseDate = (data["first_air_date"] as! String)
 
         self.category = category
